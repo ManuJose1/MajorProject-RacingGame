@@ -47,7 +47,7 @@ public class AiController : MonoBehaviour
         tracker.transform.LookAt(circuit.waypoints[currentTrackerWP].transform.position);
         tracker.transform.Translate(0, 0, 1.0f);
 
-        if (Vector3.Distance(tracker.transform.position, circuit.waypoints[currentTrackerWP].transform.position) < 1.0f)
+        if (Vector3.Distance(tracker.transform.position, circuit.waypoints[currentTrackerWP].transform.position) < 3.0f)
         {
             currentTrackerWP++;
             if (currentTrackerWP >= circuit.waypoints.Length)
@@ -61,7 +61,6 @@ public class AiController : MonoBehaviour
         this.GetComponent<Ghost>().enabled = false;
     }
 
-    bool isIncline = false;
     // Update is called once per frame
     void Update()
     {

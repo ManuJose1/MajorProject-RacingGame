@@ -529,7 +529,7 @@ MonoBehaviour:
   lowPitch: 1
   highPitch: 6
   numGears: 5
-  maxSpeed: 200
+  maxSpeed: 70
   smokePrefab: {fileID: 1385372240720739018, guid: 3dc8f7e80c26f574cba606ea313b1e63, type: 3}
 --- !u!114 &1079867353778281249
 MonoBehaviour:

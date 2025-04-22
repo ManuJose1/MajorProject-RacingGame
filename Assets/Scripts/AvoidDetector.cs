@@ -7,6 +7,12 @@ public class AvoidDetector : MonoBehaviour
     public float wanderDistance = 2; // Distance to the object being avoided
     public float avoidLength = 2; // Length of the avoidance raycast
 
+    void Start()
+    {
+        avoidPath = 0;
+        avoidTime = 0;
+    }
+    
     void OnCollisionExit(Collision col)
     {
         if (col.gameObject.tag != "car") return;
