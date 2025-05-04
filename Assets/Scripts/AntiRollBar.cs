@@ -20,6 +20,8 @@ public class AntiRollBar : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
     }
 
+    // Stiffens the suspension of the wheels to reduce body roll
+    // when the car is turning. The anti-roll bar applies a force to the wheels
     void GroundWheels(WheelCollider WL, WheelCollider WR)
     {
         WheelHit hit;
@@ -48,12 +50,13 @@ public class AntiRollBar : MonoBehaviour
         {
             rb.AddForceAtPosition(WR.transform.up * antiRollForce, WR.transform.position);
         }
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        GroundWheels(wheelFL, wheelFR); // Front wheels
-        GroundWheels(wheelRL, wheelRR); // Rear wheels
+        GroundWheels(wheelFL, wheelFR); 
+        GroundWheels(wheelRL, wheelRR); 
     }
 }

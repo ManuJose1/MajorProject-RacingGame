@@ -5,11 +5,17 @@ TagManager:
   serializedVersion: 3
   tags:
   - car
+  - road
+  - HUD
+  - MapArrow
+  - CheckPoint
+  - Circuit
+  - Skidmarks
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostProcessing
   - Water
   - UI
   - 
@@ -17,7 +23,7 @@ TagManager:
   - ReSpawn
   - Track
   - Ground
-  - 
+  - Arrow
   - 
   - 
   - 

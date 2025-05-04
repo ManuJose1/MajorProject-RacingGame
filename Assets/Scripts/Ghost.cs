@@ -14,6 +14,8 @@ public class Ghost : MonoBehaviour
         rends = this.gameObject.GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rends)
         {
+            if (r.CompareTag("MapArrow")) continue;
+            
             // Enable transparency for URP materials
             r.material.SetFloat("_Surface", 1.0f); // 1 = Transparent
             r.material.SetFloat("_Blend", 0.0f);   // Alpha blending
@@ -27,6 +29,8 @@ public class Ghost : MonoBehaviour
     {
         foreach (Renderer r in rends)
         {
+            if (r.CompareTag("MapArrow")) continue;
+
             // Reset material to opaque for URP materials
             r.material.SetFloat("_Surface", 0.0f); // 0 = Opaque
             r.material.SetFloat("_Blend", 1.0f);   // Default blending
@@ -42,6 +46,7 @@ public class Ghost : MonoBehaviour
         alpha = 0.3f + Mathf.PingPong(Time.time * flashSpeed, 0.7f);
         foreach (Renderer r in rends)
         {
+            if (r.CompareTag("MapArrow")) continue;
             r.material.color = new Color(1, 1, 1, alpha);
         }
     }

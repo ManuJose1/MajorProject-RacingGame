@@ -455,6 +455,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 68876b52dd6509d428d414afaccdd668, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1280714513232984031}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 68876b52dd6509d428d414afaccdd668, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1806875761135778806}
     - targetCorrespondingSourceObject: {fileID: -8914139597972173133, guid: 68876b52dd6509d428d414afaccdd668, type: 3}
       insertIndex: -1
       addedObject: {fileID: 147323765438357478}
@@ -531,6 +534,8 @@ MonoBehaviour:
   numGears: 5
   maxSpeed: 70
   smokePrefab: {fileID: 1385372240720739018, guid: 3dc8f7e80c26f574cba606ea313b1e63, type: 3}
+  playerNamePrefab: {fileID: 0}
+  carMesh: {fileID: 0}
 --- !u!114 &1079867353778281249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +563,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b01992237effde54bb1e6b701efe06d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1806875761135778806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892151574649628714}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 358fe43cbe9fb81478be8308d51615a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5433184830883019571 stripped

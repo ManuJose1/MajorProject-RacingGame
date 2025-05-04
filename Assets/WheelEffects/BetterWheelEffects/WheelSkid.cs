@@ -19,7 +19,7 @@ public class WheelSkid : MonoBehaviour {
 	WheelCollider wheelCollider;
 	WheelHit wheelHitInfo;
 
-	const float SKID_FX_SPEED = 0.5f; // Min side slip speed in m/s to start showing a skid
+	const float SKID_FX_SPEED = 0.3f; // Min side slip speed in m/s to start showing a skid
 	const float MAX_SKID_INTENSITY = 20.0f; // m/s where skid opacity is at full intensity
 	const float WHEEL_SLIP_MULTIPLIER = 10.0f; // For wheelspin. Adjust how much skids show
 	int lastSkid = -1; // Array index for the skidmarks controller. Index of last skidmark piece this wheel used
@@ -30,6 +30,14 @@ public class WheelSkid : MonoBehaviour {
 	protected void Awake() {
 		wheelCollider = GetComponent<WheelCollider>();
 		lastFixedUpdateTime = Time.time;
+	}
+
+	void Start()
+	{
+		if (skidmarksController == null)
+		{
+			skidmarksController = GameObject.FindGameObjectWithTag("Skidmarks").GetComponent<Skidmarks>();
+		}
 	}
 
 	protected void FixedUpdate() {

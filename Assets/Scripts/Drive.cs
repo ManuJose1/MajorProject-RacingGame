@@ -1,21 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-// This script controls the car's movement, including driving, steering, and skid effects
 public class Drive : MonoBehaviour
 {
-    // The wheel colliders that handle the physics of the wheels
     public WheelCollider[] WCs;
-    // The visual wheel models that the player sees
     public GameObject[] Wheels;
-    // How much power the car has when accelerating
     public float torque = 200;
-    // How far the front wheels can turn left or right
     public float maxSteerAngle = 30;
-    // How strong the brakes are
     public float maxBrakeTorque = 500;
-    // Sound that plays when the car is skidding
     public AudioSource skidSound;
     public AudioSource engineSound;
     public Rigidbody rb;
@@ -32,6 +26,11 @@ public class Drive : MonoBehaviour
     public ParticleSystem smokePrefab;
     ParticleSystem[] tireSmoke = new ParticleSystem[4];
 
+    public GameObject playerNamePrefab;
+    public Renderer carMesh;
+
+    string[] aiNames = {"AI-James", "AI-John", "AI-Mike", "AI-Sarah", "AI-Linda", "AI-Kate", "AI-Mary", "AI-Emma"};
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,11 +38,22 @@ public class Drive : MonoBehaviour
         {
             tireSmoke[i] = Instantiate(smokePrefab);
             tireSmoke[i].Stop();
-        }
+        } 
+
+        GameObject playerName = Instantiate(playerNamePrefab);
+        playerName.GetComponent<NameUIController>().target = rb.gameObject.transform;
+        if (this.GetComponent<AiController>().enabled)
+                playerName.GetComponent<TMPro.TextMeshProUGUI>().text = aiNames[Random.Range(0, aiNames.Length)];
+        else
+                playerName.GetComponent<TMPro.TextMeshProUGUI>().text = PlayerPrefs.GetString("PlayerName");
+                
+        playerName.GetComponent<NameUIController>().carRend = carMesh;
     }
+
 
     public void CalculateEngineSound()
     {
+        //Calculate current gear basd on speed and max speed
         float gearPercentage = (1 / (float)numGears);
         float targetGearFactor = Mathf.InverseLerp(gearPercentage * currentGear, gearPercentage * (currentGear + 1),
                                                     Mathf.Abs(currentSpeed / maxSpeed));
@@ -62,6 +72,7 @@ public class Drive : MonoBehaviour
         if (speedPercentage > upperGearMax && (currentGear < (numGears - 1)))
             currentGear++;
 
+        //Pitch goes down when the gear goes up and increases
         float pitch = Mathf.Lerp(lowPitch, highPitch, rpm);
         engineSound.pitch = Mathf.Min(highPitch, pitch) * 0.25f;
     }
@@ -106,9 +117,7 @@ public class Drive : MonoBehaviour
     // Checks if any wheels are skidding and handles skid effects
     public void CheckSkid()
     {
-        // Count how many wheels are currently skidding
         int numSkidding = 0;
-
 
         for (int i = 0; i < 4; i++)
         {
@@ -117,7 +126,7 @@ public class Drive : MonoBehaviour
             WCs[i].GetGroundHit(out wheelHit);
 
             // If the wheel is skidding (either spinning or sliding)
-            if (Mathf.Abs(wheelHit.forwardSlip) >= 0.4f || Mathf.Abs(wheelHit.sidewaysSlip) >= 0.2f)
+            if (Mathf.Abs(wheelHit.forwardSlip) >= 0.4f || Mathf.Abs(wheelHit.sidewaysSlip) >= 0.3f)
             {
                 numSkidding++;
                 // Play skid sound if it's not already playing
